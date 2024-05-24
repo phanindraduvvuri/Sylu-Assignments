@@ -4,50 +4,56 @@
 
 using namespace std;
 
-int attack_roll, damage_amount;
+int attackRoll, damageAmount;
 
-int Character::getHealth() { return hit_points; }
+int Character::getHealth() { return hitPoints; }
 
 string Character::getName() { return name; }
 
 string Character::getRole() { return role; }
 
-void Character::damage(int amount) {
-    hit_points = max(0, hit_points - amount);
+void Character::damage(int amount)
+{
+    hitPoints = max(0, hitPoints - amount);
 }
 
-void Character::print(std::ostream &os) {
+void Character::print(std::ostream &os)
+{
     os << "Character summary\n"
        << "-----------------\n"
        << name << " the " << role << '\n'
-       << "HP: " << hit_points << '\n'
-       << "AB: " << attack_bonus << '\n'
-       << "DB: " << damage_bonus << '\n'
-       << "AC: " << armor_class << "\n\n";
+       << "HP: " << hitPoints << '\n'
+       << "AB: " << attachBonus << '\n'
+       << "DB: " << damageBonus << '\n'
+       << "AC: " << armorClass << "\n\n";
 }
 
-int rollDice(int sides) {
+int rollDice(int sides)
+{
     return (rand() % (20 - 1 + 1) + 1);
 }
 
-void Character::attact(Character &otherCharacter) {
+void Character::attact(Character &otherCharacter)
+{
 
     // Roll 20-sided dice and add the attack bonus
-    int rand_val = rollDice(20);
-    attack_roll = rand_val + attack_bonus;
-    cout << "Attack roll: " << rand_val << " + " << attack_bonus << " = " << attack_roll << " ---> "
-         << ((attack_roll >= otherCharacter.armor_class) ? "HIT!" : "MISS!") << endl;
+    int randVal = rollDice(20);
+    attackRoll = randVal + attachBonus;
+    cout << "Attack roll: " << randVal << " + " << attachBonus << " = " << attackRoll << " ---> "
+         << ((attackRoll >= otherCharacter.armorClass) ? "HIT!" : "MISS!") << endl;
 
+    if (attackRoll >= otherCharacter.armorClass)
+    {
+        randVal = rollDice(10);
+        damageAmount = randVal + damageBonus;
+        otherCharacter.damage(damageAmount);
 
-    if (attack_roll >= otherCharacter.armor_class) {
-        rand_val = rollDice(10);
-        damage_amount = rand_val + damage_bonus;
-        otherCharacter.damage(damage_amount);
+        cout << "Damage: " << randVal << " + " << damageBonus << " = "
+             << damageAmount << endl;
 
-        cout << "Damage: " << rand_val << " + " << damage_bonus << " = " << damage_amount << endl;
-        cout << otherCharacter.getName() << " has " << otherCharacter.getHealth() << " hit points remaining";
+        cout << otherCharacter.getName() << " has "
+             << otherCharacter.getHealth() << " hit points remaining";
     }
 
     cout << "\n\n";
 }
-

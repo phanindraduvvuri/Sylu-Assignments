@@ -4,23 +4,24 @@
 #include <string>
 #include <fstream>
 
-class Character {
+class Character
+{
     std::string name;
     std::string role;
-    int hit_points;
-    int attack_bonus;
-    int damage_bonus;
-    int armor_class;
-
+    int hitPoints;
+    int attachBonus;
+    int damageBonus;
+    int armorClass;
 
 public:
-    Character(std::string name, std::string role, int hit_points, int attack_bonus, int damage_bonus, int armor_class) {
+    Character(std::string name, std::string role, int hitPoints, int attachBonus, int damageBonus, int armorClass)
+    {
         Character::name = name;
         Character::role = role;
-        Character::hit_points = hit_points;
-        Character::attack_bonus = attack_bonus;
-        Character::damage_bonus = damage_bonus;
-        Character::armor_class = armor_class;
+        Character::hitPoints = hitPoints;
+        Character::attachBonus = attachBonus;
+        Character::damageBonus = damageBonus;
+        Character::armorClass = armorClass;
     };
 
     int getHealth();
@@ -35,6 +36,5 @@ public:
 
     void attact(Character &otherCharacter);
 };
-
 
 #endif
