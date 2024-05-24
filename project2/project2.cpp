@@ -5,12 +5,12 @@
 
 using namespace std;
 
-int main()
-{
+
+int main() {
 
     // Read input from user
     string name, role;
-    int hitPoints, attachBonus, damageBonus, armorClass;
+    int hitPoints, attackBonus, damageBonus, armorClass;
 
     cout << "First character name?" << endl;
     cin >> name;
@@ -22,7 +22,7 @@ int main()
     cin >> hitPoints;
 
     cout << name << " the " << role << "'s attack bonus?" << endl;
-    cin >> attachBonus;
+    cin >> attackBonus;
 
     cout << name << " the " << role << "'s damage bonus?" << endl;
     cin >> damageBonus;
@@ -30,7 +30,7 @@ int main()
     cout << name << " the " << role << "'s armor class" << endl;
     cin >> armorClass;
 
-    Character char1(name, role, hitPoints, attachBonus, damageBonus, armorClass);
+    Character char1(name, role, hitPoints, attackBonus, damageBonus, armorClass);
 
     char1.print(cout);
 
@@ -46,7 +46,7 @@ int main()
     cin >> hitPoints;
 
     cout << name << " the " << role << "'s attack bonus?" << endl;
-    cin >> attachBonus;
+    cin >> attackBonus;
 
     cout << name << " the " << role << "'s damage bonus?" << endl;
     cin >> damageBonus;
@@ -54,24 +54,20 @@ int main()
     cout << name << " the " << role << "'s armor class" << endl;
     cin >> armorClass;
 
-    Character char2(name, role, hitPoints, attachBonus, damageBonus, armorClass);
+    Character char2(name, role, hitPoints, attackBonus, damageBonus, armorClass);
 
     char2.print(cout);
 
-    bool currentAttackerFlag = true; // if true - char1 attacks, false - char2 attacks
+    bool currentAttackerFlag = true;  // if true - char1 attacks, false - char2 attacks
 
     cout << "Simulated Combat: " << endl;
-    while ((char1.getHealth() > 0) && (char2.getHealth() > 0))
-    {
-        if (currentAttackerFlag)
-        {
+    while ((char1.getHealth() > 0) && (char2.getHealth() > 0)) {
+        if (currentAttackerFlag) {
             cout << char1.getName() << " attacks!" << endl;
-            char1.attact(char2);
-        }
-        else
-        {
+            char1.attack(char2);
+        } else {
             cout << char2.getName() << " attacks!" << endl;
-            char2.attact(char1);
+            char2.attack(char1);
         }
 
         currentAttackerFlag = !currentAttackerFlag;

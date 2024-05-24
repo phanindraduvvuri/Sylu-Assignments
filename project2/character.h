@@ -3,28 +3,28 @@
 
 #include <string>
 #include <fstream>
+#include <utility>
 
-class Character
-{
+class Character {
     std::string name;
     std::string role;
     int hitPoints;
-    int attachBonus;
+    int attackBonus;
     int damageBonus;
     int armorClass;
 
+
 public:
-    Character(std::string name, std::string role, int hitPoints, int attachBonus, int damageBonus, int armorClass)
-    {
-        Character::name = name;
-        Character::role = role;
-        Character::hitPoints = hitPoints;
-        Character::attachBonus = attachBonus;
+    Character(std::string name, std::string role, int points, int bonus, int damageBonus, int aClass) {
+        Character::name = std::move(name);
+        Character::role = std::move(role);
+        Character::hitPoints = points;
+        Character::attackBonus = bonus;
         Character::damageBonus = damageBonus;
-        Character::armorClass = armorClass;
+        Character::armorClass = aClass;
     };
 
-    int getHealth();
+    int getHealth() const;
 
     std::string getName();
 
@@ -34,7 +34,8 @@ public:
 
     void damage(int amount);
 
-    void attact(Character &otherCharacter);
+    void attack(Character &otherCharacter) const;
 };
+
 
 #endif
